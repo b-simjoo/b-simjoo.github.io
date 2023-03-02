@@ -20,15 +20,20 @@ const floatingTexts = [
   "-",
   "/",
   "\\",
-  "&",
+  "&amp;",
   "$",
-  "1",
-  "0",
-  "10",
-  "01",
-  "</>",
   "*",
   "#",
+  '<i class="fa-brands fa-python"></i>',
+  '<i class="fa-brands fa-github"></i>',
+  '<i class="fa-brands fa-wordpress"></i>',
+  '<i class="fa-brands fa-html5"></i>',
+  '<i class="fa-solid fa-code"></i>',
+  '<i class="fa-brands fa-square-js"></i>',
+  '<i class="fa-brands fa-dev"></i>',
+  '<i class="fa-solid fa-database"></i>',
+  '<i class="fa-brands fa-linux"></i>',
+  '<i class="fa-brands fa-stack-overflow"></i>',
 ];
 
 var r = document.querySelector(":root");
@@ -51,7 +56,7 @@ function spawnFloatingObject() {
   let floatingInner = document.createElement("span");
   floatingInner.classList.add("inner");
   floatingObject.appendChild(floatingInner);
-  floatingInner.innerText = floatingTexts[rand(0, floatingTexts.length - 1)];
+  floatingInner.innerHTML = floatingTexts[rand(0, floatingTexts.length - 1)];
   floatContainer.appendChild(floatingObject);
   let d = floatSpeed * animationTiming;
   floatingObject.style.top = (Math.sin(dir) * d + top).toString() + "px";
@@ -117,5 +122,12 @@ window.onload = function () {
     }
   }
   for (let i = 0; i < R * floatingTexts.length; i++) spawnFloatingObject();
+
+  if ("data-darkreader-scheme" in document.documentElement.attributes) {
+    console.log(
+      "Darkreader add-on detected, It is a good plugin and I use it but it will change the colors I used! I recommend to add my webpage to whitelist!"
+    );
+  }
+
   requestAnimationFrame(floatAnimate);
 };
