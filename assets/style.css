@@ -2,6 +2,7 @@
 
 :root{
     --animation-timing:1s;
+    --fade-delay: .2s;
 }
 
 html, body{
@@ -94,7 +95,7 @@ a.button{
 }
 
 section.sect-1{
-    background-color: #242424;
+    background-color: #131313;
 }
 
 section.sect-1>.overlay>.row{
@@ -205,7 +206,7 @@ section.sect-1 .fancy{
 
 .float-object .inner{
     opacity:0;
-    animation:fadeIn var(--animation-timing) var(--animation-timing) forwards;
+    animation:fadeIn var(--animation-timing) var(--fade-delay) forwards;
 }
 
 @keyframes fadeIn {

@@ -1,6 +1,8 @@
-const rand = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+const rand = (min, max) => Math.random() * (max - min + 1) + min;
+const d2r = (d) => (d / 180) * Math.PI;
 
-const floatSpeed = 10; //px/s
+const floatSpeed = 20; //px/s
 const animationTiming = 5; //s
 const divisor = 400000;
 const floatingTexts = [
@@ -12,14 +14,8 @@ const floatingTexts = [
   "C#",
   "PHP",
   "Dev",
-  "{",
-  "}",
-  "(",
-  ")",
-  "+",
-  "-",
-  "/",
-  "\\",
+  "{}",
+  "()",
   "&amp;",
   "$",
   "*",
@@ -48,50 +44,48 @@ function spawnFloatingObject() {
   let left = rand(0, floatContainer.clientWidth);
   floatingObject.style.top = top.toString() + "px";
   floatingObject.style.left = left.toString() + "px";
-  let rotation = Math.random() * 360;
+  let rotation = rand(0, 360);
   floatingObject.dataset.rotation = rotation;
   floatingObject.style.transform = `rotate(${rotation}deg)`;
-  let dir = Math.random() * 2 * Math.PI;
+  let dir = d2r(rand(0, 360));
   floatingObject.dataset.direction = dir;
   let floatingInner = document.createElement("span");
   floatingInner.classList.add("inner");
   floatingObject.appendChild(floatingInner);
-  floatingInner.innerHTML = floatingTexts[rand(0, floatingTexts.length - 1)];
+  floatingInner.innerHTML = floatingTexts[randInt(0, floatingTexts.length - 1)];
   floatContainer.appendChild(floatingObject);
-  let d = floatSpeed * animationTiming;
-  floatingObject.style.top = (Math.sin(dir) * d + top).toString() + "px";
-  floatingObject.style.left = (Math.cos(dir) * d + left).toString() + "px";
-  floatingObjects.push(floatingObject);
+  return floatingObject;
 }
 
-function floatAnimate() {
-  for (let i = 0; i < floatingObjects.length; i++) {
-    let fo = floatingObjects[i];
-    let top = parseFloat(fo.style.top.slice(0, -2));
-    let left = parseFloat(fo.style.left.slice(0, -2));
-    let d = floatSpeed * animationTiming;
-    let dir = parseFloat(fo.dataset.direction);
-    let rot = parseFloat(fo.dataset.rotation);
-    if (
-      top > -20 &&
-      top < floatContainer.clientHeight + 20 &&
-      left > -20 &&
-      left < floatContainer.clientWidth + 20
-    ) {
-      fo.style.top = (Math.sin(dir) * d + top).toString() + "px";
-      fo.style.left = (Math.cos(dir) * d + left).toString() + "px";
-      fo.dataset.direction = dir + (Math.random() - 0.5) * 0.083 * Math.PI;
-      rot += (Math.random() - 0.5) * 360;
-      fo.dataset.rotation = rot;
-      fo.style.transform = `rotate(${rot}deg)`;
-    } else {
-      floatingObjects.splice(i, 1);
-      fo.remove();
-      spawnFloatingObject();
-    }
+function moveFloatingObject(fo) {
+  let top = parseFloat(fo.style.top.slice(0, -2));
+  let left = parseFloat(fo.style.left.slice(0, -2));
+  let movement = floatSpeed * animationTiming;
+  let direction = parseFloat(fo.dataset.direction);
+  let rotation = parseFloat(fo.dataset.rotation);
+  if (
+    top > -20 &&
+    top < floatContainer.clientHeight + 20 &&
+    left > -20 &&
+    left < floatContainer.clientWidth + 20
+  ) {
+    fo.style.top = (Math.sin(direction) * movement + top).toString() + "px";
+    fo.style.left = (Math.cos(direction) * movement + left).toString() + "px";
+    fo.dataset.direction = direction + d2r(rand(-15, 15));
+    rotation += rand(-30, 30);
+    fo.dataset.rotation = rotation;
+    fo.style.transform = `rotate(${rotation}deg)`;
+  } else {
+    fo.remove();
+    let newObject = spawnFloatingObject();
+    setTimeout(() => moveFloatingObject(newObject), 1);
   }
+}
 
-  setTimeout(requestAnimationFrame, animationTiming * 1000, floatAnimate);
+function floatAnimation() {
+  Array.from(floatContainer.children).forEach((fo) => moveFloatingObject(fo));
+
+  setTimeout(requestAnimationFrame, animationTiming * 1000, floatAnimation);
 }
 
 window.onload = function () {
@@ -114,7 +108,7 @@ window.onload = function () {
           word.appendChild(outer);
           let inner = document.createElement("span");
           inner.classList.add("inner");
-          inner.style.animationDelay = `${rand(-10000, 0)}ms`;
+          inner.style.animationDelay = `${randInt(-10000, 0)}ms`;
           inner.innerText = letter;
           outer.appendChild(inner);
         });
@@ -129,5 +123,5 @@ window.onload = function () {
     );
   }
 
-  requestAnimationFrame(floatAnimate);
+  floatAnimation();
 };
