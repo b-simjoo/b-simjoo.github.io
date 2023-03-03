@@ -38,6 +38,10 @@ section>.float-container{
     right: 0;
 }
 
+section>.float-container.out-of-view *{
+    animation: fadeIn .5s backwards reverse;
+}
+
 section>.overlay{
     z-index: 1;
     width: 100%;
