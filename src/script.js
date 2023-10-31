@@ -9,6 +9,9 @@ const doFloatAnim = true;
 const floatingTexts = [
   'Python',
   'Flask',
+  'FastAPI',
+  'Postgres',
+  'MongoDB',
   'JS',
   'CSS',
   'HTML',
