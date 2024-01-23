@@ -1,0 +1,61 @@
+# SEO keywords and description for your site.
+keywords = "hugo, tailwind, tailwindcss, hugo theme, hugo theme tailwind"
+subtitle = "Example site for hugo-theme-tailwind"
+
+# dir name of your blog content (default is `content/posts`).
+# the list of set content will show up on your index page (baseurl).
+contentTypeName = "post"
+
+[header]
+  logo = "logo.webp"
+
+[footer]
+  since = 2024
+  poweredby = true
+
+# giscus is comments system powered by GitHub Discussions
+# generate configurations from https://giscus.app/
+[giscus]
+  enabled = true
+  repo = "b-simjoo/b-simjoo.github.io"
+  repoID = "R_kgDOI846WQ"
+  category = "Comments"
+  categoryID = "DIC_kwDOI846Wc4CcmJU"
+  mapping = "title"
+  strict = "0"
+  reactionsEnabled = "1"
+  emitMetadata = "1"
+  inputPosition = "bottom"
+  theme = "dark"
+  lang = "en"
+
+[social_media]
+  [[social_media.items]]
+    enabled = true
+    title = 'Mastodon'
+    icon = 'brand-mastodon'
+    link = 'https://khiar.net/@bsimjoo'
+
+  [[social_media.items]]
+    enabled = true
+    title = 'Twitter'
+    icon = 'brand-x'
+    link = 'https://twitter.com/__PurPleFoX__'
+
+  [[social_media.items]]
+    enabled = true
+    title = 'Telegram'
+    icon = 'brand-telegram'
+    link = 'https://t.me/bsimjoo'
+
+  [[social_media.items]]
+    enabled = false
+    title = 'LinkedIn'
+    icon = 'brand-linkedin'
+    link = 'https://www.linkedin.com/'
+
+  [[social_media.items]]
+    enabled = true
+    title = 'Github'
+    icon = 'brand-github'
+    link = 'https://github.com/b-simjoo'

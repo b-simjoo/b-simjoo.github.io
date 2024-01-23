@@ -1,0 +1,35 @@
+[en]
+  languageCode = 'en-US'
+  languageDirection = 'ltr'
+  languageName = 'English'
+  weight = 1
+  [en.menu]
+  [[en.menu.main]]
+    identifier = "post"
+    name = "Post"
+    pageRef = "post"
+    weight = 10
+
+  [[en.menu.main]]
+    identifier = "about"
+    name = "About"
+    pageRef = "about"
+    weight = 20
+
+[fa-ir]
+  languageCode = 'fa-IR'
+  languageDirection = 'rtl'
+  languageName = 'فارسی'
+  weight = 2
+  [fa-ir.menu]
+  [[fa-ir.menu.main]]
+    identifier = "post"
+    name = "فرسته ها"
+    pageRef = "post"
+    weight = 10
+
+  [[fa-ir.menu.main]]
+    identifier = "about"
+    name = "درباره"
+    pageRef = "about"
+    weight = 20

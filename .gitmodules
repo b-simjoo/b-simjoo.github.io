@@ -1,0 +1,3 @@
+[submodule "themes/tailwind"]
+	path = themes/tailwind
+	url = https://github.com/b-simjoo/hugo-theme-tailwind
